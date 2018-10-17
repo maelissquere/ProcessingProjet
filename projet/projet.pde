@@ -20,6 +20,7 @@ boolean isActivate5;
 boolean isActivate6;
 boolean isActivate7;
 boolean isActivate8;
+boolean isActivate9;
 boolean dessineDeuxiemeEllipse;
 int m;
 boolean dessineTroisiemeEllipse;
@@ -46,6 +47,7 @@ float coordXg;
 float coordYg;
 float coordXi;
 float coordYi; 
+float coordXj;
 
 //Tableau pour stocker les samples
 AudioSample[] tabSample = new AudioSample[10];
@@ -158,6 +160,20 @@ if(isActivate6 == true) {
   
   
 }
+//--------------------Key = j -------------------------
+
+if(isActivate9 == true){
+  
+  while(coordXj < 300){
+    
+    coordXj = coordXj + 1;
+    fill( random(0,255),random(0,255),random(0,255), 10);
+    bezier(40, 50, 60, 10, coordXj, 75, 300, 400);
+    
+  }
+  
+}
+
 
 
 }
@@ -179,7 +195,7 @@ void keyPressed() {
        fill(255,255,255);
        textSize(32);
        texte = texte + key;
-       text(texte,150,750);
+       text(texte,50,750);
        
        
        //Lettre a
@@ -316,9 +332,12 @@ void keyPressed() {
        //Lettre j
        
        else if (keyIndex == 9){
+         coordXj = 0;
+         isActivate9 = true;
          
-         rect(40,50,60,90);
          
+         
+        
        }
   }
   
