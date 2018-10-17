@@ -48,6 +48,10 @@ float coordYg;
 float coordXi;
 float coordYi; 
 float coordXj;
+float coordXdepartj;
+float coordYdepartj;
+float coordXarriveej;
+float coordYarriveej;
 
 //Tableau pour stocker les samples
 AudioSample[] tabSample = new AudioSample[10];
@@ -164,11 +168,11 @@ if(isActivate6 == true) {
 
 if(isActivate9 == true){
   
-  while(coordXj < 300){
+  if(coordXj < 500){
     
-    coordXj = coordXj + 1;
+    coordXj = coordXj + 10;
     fill( random(0,255),random(0,255),random(0,255), 10);
-    bezier(40, 50, 60, 10, coordXj, 75, 300, 400);
+    bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
     
   }
   
@@ -333,6 +337,10 @@ void keyPressed() {
        
        else if (keyIndex == 9){
          coordXj = 0;
+         coordXdepartj =random(0,800);
+         coordYdepartj =random(0,800);
+         coordXarriveej = random(0,800);
+         coordYarriveej = random(0,800);
          isActivate9 = true;
          
          
