@@ -44,16 +44,18 @@ float coordXf4;
 float coordYf4;
 float coordXg;
 float coordYg;
+float coordXi;
+float coordYi; 
 
 //Tableau pour stocker les samples
-AudioSample[] tabSample = new AudioSample[8];
+AudioSample[] tabSample = new AudioSample[9];
 
 void setup(){
  minim = new Minim(this);
  size(800,800);
  background(100,100,100);
  //On importe tous les sons du tableau
- for (int i = 0; i < 8; i++){
+ for (int i = 0; i < 9; i++){
    tabSample[i] = minim.loadSample("sample" + i + ".mp3");
   
  }
@@ -239,7 +241,7 @@ void keyPressed() {
          
          isActivate5 = true;
          noStroke();
-         fill( random(0,255),random(0,255),random(0,255));
+         fill( random(0,255),random(0,255),random(0,255), 70);
          bezier(coordXf1, coordYf1, coordXf2, coordYf2, coordXf3, coordYf3, coordXf4, coordYf4);
          coordXf1 = random(0,790);
          coordYf1 = random(0,790);
@@ -261,13 +263,13 @@ void keyPressed() {
          coordXg = random(0,800);
          coordYg = random(0,800);
          beginShape(TRIANGLE_STRIP);
-         vertex(coordXg + 30, 75);
-         vertex(40, 20);
-         vertex(50, 75);
-         vertex(60, 20);
-         vertex(70, 75);
-         vertex(80, 20);
-         vertex(90, 75);
+         vertex(coordXg + 30, coordYg + 75);
+         vertex(coordXg + 40, coordYg + 20);
+         vertex(coordXg + 50, coordYg + 75);
+         vertex(coordXg + 60, coordYg + 20);
+         vertex(coordXg + 70, coordYg + 75);
+         vertex(coordXg + 80, coordYg + 20);
+         vertex(coordXg + 90, coordYg + 75);
          endShape();
 
          
@@ -278,7 +280,7 @@ void keyPressed() {
        else if(keyIndex == 7){
          isActivate7 = true;
          noStroke();
-         fill(random(0,255),random(0,255),random(0,255));
+         fill(random(0,255),random(0,255),random(0,255),90);
         
          beginShape();
          vertex(random(10,800), random(10,800));
@@ -294,6 +296,26 @@ void keyPressed() {
        // Lettre i
        else if(keyIndex == 8){
          
+         fill(random(0,255),random(0,255),random(0,255));
+         coordXi = random(0,800);
+         coordYi = random(0,800);
+         beginShape(QUADS);
+         vertex(coordXi + 30, coordYi + 20);
+         vertex(coordXi + 30, coordYi + 75);
+         vertex(coordXi + 50, coordYi + 75);
+         vertex(coordXi + 50, coordYi + 20);
+         vertex(coordXi + 65, coordYi + 20);
+         vertex(coordXi + 65, coordYi + 75);
+         vertex(coordXi + 85, coordYi + 75);
+         vertex(coordXi + 85, coordYi + 20);
+         endShape();
+         
+       }
+       
+       
+       //Lettre j
+       
+       else if (keyIndex == 9){
          
        }
   }
@@ -304,7 +326,7 @@ void keyPressed() {
 void stop() {
   
   //On ferme tous les sample importés
-  for (int i = 0; i<8; i++){
+  for (int i = 0; i<9; i++){
   tabSample[i].close();
   }
   
