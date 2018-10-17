@@ -168,11 +168,29 @@ if(isActivate6 == true) {
 
 if(isActivate9 == true){
   
-  if(coordXj < 500){
+    
+ 
+    if (coordXj <500) {
+  
+
     
     coordXj = coordXj + 10;
     fill( random(0,255),random(0,255),random(0,255), 10);
     bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
+    
+    }
+    
+    
+
+   if(millis() - m > 1300) {
+     
+     if (coordXj <1000) {
+  
+    coordXj = coordXj + 10;
+    fill( random(0,255),random(0,255),random(0,255), 10);
+    bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
+    
+  }
     
   }
   
@@ -336,6 +354,7 @@ void keyPressed() {
        //Lettre j
        
        else if (keyIndex == 9){
+         m = millis();
          coordXj = 0;
          coordXdepartj =random(0,800);
          coordYdepartj =random(0,800);
@@ -349,7 +368,7 @@ void keyPressed() {
        }
   }
   
-  
+ 
   }
 
 void stop() {
