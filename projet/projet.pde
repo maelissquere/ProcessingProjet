@@ -48,14 +48,14 @@ float coordXi;
 float coordYi; 
 
 //Tableau pour stocker les samples
-AudioSample[] tabSample = new AudioSample[9];
+AudioSample[] tabSample = new AudioSample[10];
 
 void setup(){
  minim = new Minim(this);
  size(800,800);
  background(100,100,100);
  //On importe tous les sons du tableau
- for (int i = 0; i < 9; i++){
+ for (int i = 0; i < 10; i++){
    tabSample[i] = minim.loadSample("sample" + i + ".mp3");
   
  }
@@ -317,6 +317,8 @@ void keyPressed() {
        
        else if (keyIndex == 9){
          
+         rect(40,50,60,90);
+         
        }
   }
   
@@ -326,7 +328,7 @@ void keyPressed() {
 void stop() {
   
   //On ferme tous les sample importés
-  for (int i = 0; i<9; i++){
+  for (int i = 0; i<10; i++){
   tabSample[i].close();
   }
   
