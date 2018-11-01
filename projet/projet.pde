@@ -14,17 +14,23 @@ AudioSample sample2;
 
 boolean sound;
 int diameter;
+int diameter1;
 boolean isActivate3;
 boolean isActivate9;
 boolean isActivate12;
 boolean isActivate13;
+boolean isActivate14;
+boolean isActivate15;
 boolean dessineDeuxiemeTetris;
 boolean dessineTroisiemeTetris;
 boolean dessineDeuxiemeEllipse;
 boolean dessineTroisiemeEllipse;
 boolean dessineDeuxiemeTrait;
 boolean dessineTroisiemeTrait;
+
+int o;
 int m;
+
 float coordX4;
 float coordY4;
 String texte;
@@ -61,213 +67,228 @@ float coordXm;
 float coordYm;
 float coordXn;
 float coordYn;
+String sens;
+int positionYo;
+
 
 
 //Tableau pour stocker les samples
-AudioSample[] tabSample = new AudioSample[14];
+AudioSample[] tabSample = new AudioSample[16];
 
 void setup(){
  minim = new Minim(this);
  size(800,800);
  background(100,100,100);
  //On importe tous les sons du tableau
- for (int i = 0; i < 14; i++){
+ for (int i = 0; i < 16; i++){
    tabSample[i] = minim.loadSample("sample" + i + ".mp3");
   
  }
+ 
  diameter = 0;
+ diameter1 = 0;
  dessineDeuxiemeEllipse = false;
  dessineTroisiemeEllipse = false;
  dessineDeuxiemeTetris = false;
  dessineTroisiemeTetris = false;
  dessineDeuxiemeTrait = false;
  dessineTroisiemeTrait = false; 
+
+ positionYo= 0;
+
+
+ sens = "descend";
+ 
  texte = "";
  
 }
 
 void draw() {
 
- // -------------------- KEY = b -------------------------
-  //Pour keyIndex = 1, on augmente le diamètre du cercle
-if (diameter != 0 && diameter <= 200){
-diameter = diameter + 7;
-ellipse(coordXb,coordYb, diameter, diameter);
+// -------------------- KEY = b -------------------------
+     //Pour keyIndex = 1, on augmente le diamètre du cercle
+     if (diameter != 0 && diameter <= 200){
+     diameter = diameter + 7;
+     ellipse(coordXb,coordYb, diameter, diameter);
 
-}
+     }
 
 // ---------------------- KEY = c ----------------------------
 
-//Deuxième Ellipse
-if (dessineDeuxiemeEllipse == true){
-  if(millis() - m > 158){
-    dessineDeuxiemeEllipse = false;
-   fill( random(0,255),random(0,255),random(0,255));
-    ellipse(random(0,600), random(0,600), 10,10);
-    
-   }
-  else {
-    // le temps pas ecoule
-  
-   }
-}
-else { 
-  
- // dessineDeuxiemeEllipse est fausse
-}
+     //Deuxième Ellipse
+     if (dessineDeuxiemeEllipse == true){
+        if(millis() - m > 158){
+        dessineDeuxiemeEllipse = false;
+        fill( random(0,255),random(0,255),random(0,255));
+        ellipse(random(0,600), random(0,600), 10,10);
+         }
+        else {
+        // le temps pas ecoule
+        }
+      }
+      else { 
+      // dessineDeuxiemeEllipse est fausse
+      }
 
-//Toisième Ellipse 
-if (dessineTroisiemeEllipse == true){
-  if(millis() - m > 450){
-    dessineTroisiemeEllipse = false;
-     fill( random(0,255),random(0,255),random(0,255));
-    ellipse(random(0,600), random(0,600), 10,10);
-    
-  }
-  else {
-    // le temps pas ecoule
+      //Toisième Ellipse 
+      if (dessineTroisiemeEllipse == true){
+         if(millis() - m > 450){
+         dessineTroisiemeEllipse = false;
+         fill( random(0,255),random(0,255),random(0,255));
+         ellipse(random(0,600), random(0,600), 10,10);   
+         }
+         else {
+         // le temps pas ecoule
+         }
+      }
+      else { 
+      // dessineDeuxiemeEllipse est fausse
+      }
   
-  }
-}
-else { 
-  
- // dessineDeuxiemeEllipse est fausse
-}
-
 //---------------------------------Key = d -------------------------
 
 
-if (isActivate3 == true){
- 
-  if (millis() - m <2161) {
-      if (frameCount % 10 == 0) {
-      fill(frameCount * 3 % 255, frameCount * 5 % 255,
-       frameCount * 7 % 255);
-      pushMatrix();
-      translate(coordX4, coordY4);
-      noStroke();
-      rotate(radians(frameCount * 3  % 360));
-      rect(0,0, 80, 20);
-      popMatrix();   
-      
+      if (isActivate3 == true){
+         if (millis() - m <2161) {
+            if (frameCount % 10 == 0) {
+            fill(frameCount * 3 % 255, frameCount * 5 % 255,
+            frameCount * 7 % 255);
+            pushMatrix();
+            translate(coordX4, coordY4);
+            noStroke();
+            rotate(radians(frameCount * 3  % 360));
+            rect(0,0, 80, 20);
+            popMatrix();    
+            }
+        }
+        else {
+        //temps pas écoulé
+        }
       }
-  }
-      else {
-      //temps pas écoulé
-      }
-}
       
 
 //--------------------Key = j -------------------------
 
-if(isActivate9 == true){
-
-    if (coordXj <500) {
-    coordXj = coordXj + 10;
-    fill( random(0,255),random(0,255),random(0,255), 10);
-    bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
-    }
+      if(isActivate9 == true){
+         if (coordXj <500) {
+         coordXj = coordXj + 10;
+         fill( random(0,255),random(0,255),random(0,255), 10);
+         bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
+          }
     
-    if(millis() - m > 1300) {
-     
-       if (coordXj <1000) {
-  
-       coordXj = coordXj + 10;
-       fill( random(0,255),random(0,255),random(0,255), 10);
-       bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
-       }  
-    }
-}
+          if(millis() - m > 1300) {
+             if (coordXj <1000) {
+             coordXj = coordXj + 10;
+             fill( random(0,255),random(0,255),random(0,255), 10);
+             bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
+             }  
+          }
+      }
 
 
 //--------------------Key = m -------------------------
 
-if(isActivate12 ==  true){
-  
-  //Deuxieme Trait
-  if (dessineDeuxiemeTrait == true){
-    if(millis() - m > 300){
-      dessineDeuxiemeTrait = false;
-      coordXm = random(0,800);
-      coordYm = random(0,800);
-      strokeWeight(10);
-      stroke(random(0,255),random(0,255),random(0,255));
-      strokeCap(ROUND);
-      noFill();
-      beginShape();
-      vertex(coordXm + 85, coordYm + 75);
-      vertex(coordXm + 130, coordYm + 75);
-      endShape();
-    }
-   
-    }
-  // Troisieme Trait
-   if (dessineTroisiemeTrait == true){
-    if(millis() - m > 600){
-      dessineTroisiemeTrait = false;
-      coordXm = random(0,800);
-      coordYm = random(0,800);
-      strokeWeight(10);
-      stroke(random(0,255),random(0,255),random(0,255));
-      strokeCap(ROUND);
-      noFill();
-      beginShape();
-      vertex(coordXm + 130, coordYm + 75);
-      vertex (coordXm + 30, coordYm + 75);
-      endShape();
-    }
- }
-}
+       if(isActivate12 ==  true){
+        
+          
+             if(millis() - m > 500){
+             
+             coordXm = random(0,800);
+             coordYm = random(0,800);
+             strokeWeight(10);
+             stroke(random(0,255),random(0,255),random(0,255));
+             strokeCap(ROUND);
+             noFill();
+             beginShape();
+             vertex(coordXm + 85, coordYm + 75);
+             vertex(coordXm + 130, coordYm + 75);
+             endShape();
+             
+             } 
+             
+      }
 
 
 //--------------------Key = n -------------------------
 
-if(isActivate13 == true){
+      if(isActivate13 == true){
   
   
-  //Deuxième Tetris
-  if (dessineDeuxiemeTetris == true){
-      if(millis() - m > 258){
-      dessineDeuxiemeTetris = false;
-      coordXn = random(0,800);
-      coordYn = random(0,800);
-      strokeWeight(5);
-      beginShape();
-      vertex(coordXn + 40, coordYn+ 40);
-      vertex(coordXn + 60, coordYn + 40);
-      vertex(coordXn + 60, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 80);
-      vertex(coordXn + 40, coordYn + 80);
-      endShape(CLOSE);
-      }
-  }
+        //Deuxième Tetris
+        if (dessineDeuxiemeTetris == true){
+            if(millis() - m > 258){
+            dessineDeuxiemeTetris = false;
+            coordXn = random(0,800);
+            coordYn = random(0,800);
+            strokeWeight(5);
+            beginShape();
+            vertex(coordXn + 40, coordYn+ 40);
+            vertex(coordXn + 60, coordYn + 40);
+            vertex(coordXn + 60, coordYn + 60);
+            vertex(coordXn + 80, coordYn + 60);
+            vertex(coordXn + 80, coordYn + 80);
+            vertex(coordXn + 40, coordYn + 80);
+            endShape(CLOSE);
+            }
+        }
  
 
-//Toisième Tetris 
-  if (dessineTroisiemeTetris == true){
-      if(millis() - m > 550){
-      dessineTroisiemeTetris = false;
-      coordXn = random(0,800);
-      coordYn = random(0,800);
-      strokeWeight(5);
-      beginShape();
-      vertex(coordXn + 40, coordYn+ 40);
-      vertex(coordXn + 60, coordYn + 40);
-      vertex(coordXn + 60, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 80);
-      vertex(coordXn + 40, coordYn + 80);
-      endShape(CLOSE);
+        //Toisième Tetris 
+        if (dessineTroisiemeTetris == true){
+            if(millis() - m > 550){
+            dessineTroisiemeTetris = false;
+            coordXn = random(0,800);
+            coordYn = random(0,800);
+            strokeWeight(5);
+            beginShape();
+            vertex(coordXn + 40, coordYn+ 40);
+            vertex(coordXn + 60, coordYn + 40);
+            vertex(coordXn + 60, coordYn + 60);
+            vertex(coordXn + 80, coordYn + 60);
+            vertex(coordXn + 80, coordYn + 80);
+            vertex(coordXn + 40, coordYn + 80);
+            endShape(CLOSE);
+            }
+         }
+  
       }
-  }
-}
+//----------------- Key = o ----------------------
+ 
+      if(isActivate14 == true ){
+        if(millis() - o < 500){
+          if(sens == "descend"){
+              if(positionYo > 650) {
+              //change de sens
+              sens="monte";
+               }
+               else{
+               positionYo = positionYo + 12;
+                  }
+          }  
+          else{
+              if(positionYo < 0) {
+              sens="descend";
+              }
+            else {
+            positionYo = positionYo - 12;
+            }    
+          }
+         noFill();
+         strokeWeight(2);
+         stroke(random(0,255), random(0,255), random(0,255));
+         ellipse(random(0,700), positionYo,50,50);
+        }
+      }
+      
+
+      
+      
   
 }
 
 
 
-// ---------------
+// -------------------------------------------
 void keyPressed() {
   
   // Si l'utilisateur presse une lettre entre a et z
@@ -417,36 +438,36 @@ void keyPressed() {
        }
        
        //Lettre k
-       else if(keyIndex == 10){
-       fill(random(0,255),random(0,255),random(0,255));
-       coordXk = random(0,800);
-       coordYk = random(0,800);
+         else if(keyIndex == 10){
+         fill(random(0,255),random(0,255),random(0,255));
+         coordXk = random(0,800);
+         coordYk = random(0,800);
        
-       beginShape();
+         beginShape();
 
-       // Exterior part of shape
-      vertex(coordXk -100,coordYk -100);
-      vertex(coordXk + 100,coordYk -100);
-      vertex(coordXk + 100,coordYk + 100);
-      vertex(coordXk -100,coordYk + 100);
-      vertex(coordXk -100,coordYk -100);
+         // Exterior part of shape
+        vertex(coordXk -100,coordYk -100);
+        vertex(coordXk + 100,coordYk -100);
+        vertex(coordXk + 100,coordYk + 100);
+        vertex(coordXk -100,coordYk + 100);
+        vertex(coordXk -100,coordYk -100);
 
-      // Interior part of shape
-      beginContour();
-      vertex(coordXk -10,coordYk -10);
-      vertex(coordXk -10,coordYk + 10);
-      vertex(coordXk + 10,coordYk + 10);
-      vertex(coordXk + 10,coordYk -10);
-      endContour();
+        // Interior part of shape
+        beginContour();
+        vertex(coordXk -10,coordYk -10);
+        vertex(coordXk -10,coordYk + 10);
+        vertex(coordXk + 10,coordYk + 10);
+        vertex(coordXk + 10,coordYk -10);
+        endContour();
 
-      // Finishing off shape
-      endShape();
+        // Finishing off shape
+        endShape();
 
          
        }
        
-      //Lettre l
-      else if(keyIndex == 11){
+      //Lettre l A CHANGER
+        else if(keyIndex == 11){
         fill(random(0,255),random(0,255),random(0,255));
         coordXl = random(0,800);
         coordYl = random(0,800);
@@ -462,45 +483,43 @@ void keyPressed() {
         
       }
       
-    //Lettre m
-      else if(keyIndex == 12){
-      coordXm = random(0,800);
-      coordYm = random(0,800);
-      strokeWeight(10);
-      stroke(random(0,255),random(0,255),random(0,255));
-      strokeCap(ROUND);
-      noFill();
-      beginShape();
-      vertex(coordXm + 30, coordYm + 75);
-      vertex(coordXm + 85, coordYm + 20);
-      endShape();
+      //Lettre m
+        else if(keyIndex == 12){
+       
       
-      isActivate12 = true;
-      m = millis();
-      dessineDeuxiemeTrait = true;
-      dessineTroisiemeTrait = true;
+        isActivate12 = true;
+        m = millis();
+       
       
     }
     
-    //Lettre n
-    else if(keyIndex == 13){
-      coordXn = random(0,800);
-      coordYn = random(0,800);
-      strokeWeight(5);
-      beginShape();
-      vertex(coordXn + 40, coordYn+ 40);
-      vertex(coordXn + 60, coordYn + 40);
-      vertex(coordXn + 60, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 60);
-      vertex(coordXn + 80, coordYn + 80);
-      vertex(coordXn + 40, coordYn + 80);
-      endShape(CLOSE);
-      isActivate13 = true;
-      m = millis();
-      dessineDeuxiemeTetris = true;
-      dessineTroisiemeTetris = true;
+      //Lettre n
+        else if(keyIndex == 13){
+        coordXn = random(0,800);
+        coordYn = random(0,800);
+        strokeWeight(5);
+        beginShape();
+        vertex(coordXn + 40, coordYn+ 40);
+        vertex(coordXn + 60, coordYn + 40);
+        vertex(coordXn + 60, coordYn + 60);
+        vertex(coordXn + 80, coordYn + 60);
+        vertex(coordXn + 80, coordYn + 80);
+        vertex(coordXn + 40, coordYn + 80);
+        endShape(CLOSE);
+        isActivate13 = true;
+        m = millis();
+        dessineDeuxiemeTetris = true;
+        dessineTroisiemeTetris = true;
     }
-      
+    
+    
+      //Lettre o
+        else if (keyIndex == 14){
+         isActivate14 = true;
+         o = millis();
+        }
+        
+   
  }
   
 }
@@ -508,7 +527,7 @@ void keyPressed() {
 void stop() {
   
   //On ferme tous les sample importés
-  for (int i = 0; i<14; i++){
+  for (int i = 0; i<16; i++){
   tabSample[i].close();
   }
   
