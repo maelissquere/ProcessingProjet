@@ -30,6 +30,7 @@ boolean dessineTroisiemeTrait;
 
 int o;
 int m;
+int m1;
 
 float coordX4;
 float coordY4;
@@ -93,15 +94,12 @@ void setup(){
  dessineTroisiemeTetris = false;
  dessineDeuxiemeTrait = false;
  dessineTroisiemeTrait = false; 
-
  positionYo= 0;
-
-
  sens = "descend";
- 
  texte = "";
  
 }
+
 
 void draw() {
 
@@ -191,7 +189,7 @@ void draw() {
        if(isActivate12 ==  true){
         
           
-             if(millis() - m > 500){
+             if(millis() - m1 < 1400){
              
              coordXm = random(0,800);
              coordYm = random(0,800);
@@ -205,6 +203,9 @@ void draw() {
              endShape();
              
              } 
+             else {
+               
+             }
              
       }
 
@@ -466,20 +467,16 @@ void keyPressed() {
          
        }
        
-      //Lettre l A CHANGER
+      //Lettre l 
         else if(keyIndex == 11){
-        fill(random(0,255),random(0,255),random(0,255));
-        coordXl = random(0,800);
-        coordYl = random(0,800);
-       
-        beginShape(TRIANGLES);
-        vertex(coordXl + 30, coordYl +  55);
-        vertex(coordXl + 40, coordYl + 20);
-        vertex(coordXl + 50, coordYl + 75);
-        vertex(coordXl + 60, coordYl + 40);
-        vertex(coordXl + 70, coordYl + 75);
-        vertex(coordXl + 80, coordYl + 20);
-        endShape();
+
+         
+         PImage licorne;
+         licorne = loadImage("licorne.png");
+         image(licorne,random(150,650),random(150,650));
+         translate(random(150,650), random(150,650));
+         rotate(radians(40));
+        
         
       }
       
@@ -488,7 +485,7 @@ void keyPressed() {
        
       
         isActivate12 = true;
-        m = millis();
+        m1 = millis();
        
       
     }
