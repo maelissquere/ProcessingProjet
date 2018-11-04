@@ -27,10 +27,13 @@ boolean dessineDeuxiemeEllipse;
 boolean dessineTroisiemeEllipse;
 boolean dessineDeuxiemeTrait;
 boolean dessineTroisiemeTrait;
+boolean isEnding;
 
 int o;
 int m;
 int m1;
+int m2;
+int m3;
 
 float coordX4;
 float coordY4;
@@ -70,6 +73,8 @@ float coordXn;
 float coordYn;
 String sens;
 int positionYo;
+PImage tableau;
+
 
 
 
@@ -97,6 +102,7 @@ void setup(){
  positionYo= 0;
  sens = "descend";
  texte = "";
+ isEnding = false;
  
 }
 
@@ -217,7 +223,7 @@ void draw() {
   
         //Deuxième Tetris
         if (dessineDeuxiemeTetris == true){
-            if(millis() - m > 258){
+            if(millis() - m2 > 258){
             dessineDeuxiemeTetris = false;
             coordXn = random(0,800);
             coordYn = random(0,800);
@@ -236,7 +242,7 @@ void draw() {
 
         //Toisième Tetris 
         if (dessineTroisiemeTetris == true){
-            if(millis() - m > 550){
+            if(millis() - m2 > 550){
             dessineTroisiemeTetris = false;
             coordXn = random(0,800);
             coordYn = random(0,800);
@@ -291,6 +297,7 @@ void draw() {
 
 // -------------------------------------------
 void keyPressed() {
+  
   
   // Si l'utilisateur presse une lettre entre a et z
   if (key >= 'a' && key <='z') {
@@ -520,8 +527,54 @@ void keyPressed() {
         
    
  }
+ 
+else if (key == ENTER){
+  save(texte+".jpg");
+  save("/data/name.jpg");
+  background(255, 238, 156);
+  
+  tableau = loadImage("name.jpg");
+  
+  image(tableau,200,390,400,400);
+  
+  textSize(30);
+  fill(0, 102, 153);
+  text("Voilà le tableau de votre prénom",50,70);
+  text(" voulez-vous en faire un autre ?", 100,100);
+  fill(0,0,0);
+  text("Recommencer", 50,300);
+  text("Quitter",600,300);
+  
+ 
+ 
+  isEnding = true;
+}
+   
+   
+ 
   
 }
+
+void mousePressed(){
+  
+  if(isEnding == true){
+    
+    if(mouseX<250 && 50<mouseX && 270<mouseY && mouseY<330){
+      setup();
+      draw();
+    
+    }
+    
+    else if(mouseX<700 && 600<mouseX && 270<mouseY && mouseY<330){
+      
+      stop();
+      exit();
+    
+    }
+  }
+  
+}
+
 
 void stop() {
   
