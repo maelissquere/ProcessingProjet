@@ -21,6 +21,9 @@ boolean isActivate12;
 boolean isActivate13;
 boolean isActivate14;
 boolean isActivate15;
+boolean isActivate16;
+boolean isActivate18;
+boolean isActivate21;
 boolean dessineDeuxiemeTetris;
 boolean dessineTroisiemeTetris;
 boolean dessineDeuxiemeEllipse;
@@ -81,22 +84,29 @@ float coordXp2;
 float coordYp2;
 float coordXp1;
 float coordYp1;
+float coordXq;
+float coordXs;
+float coordYs;
+float coordXv1;
+float coordYv1;
+
 String sens;
 int positionYo;
 PImage tableau;
-
+float sinus;
+float angle;
 
 
 
 //Tableau pour stocker les samples
-AudioSample[] tabSample = new AudioSample[16];
+AudioSample[] tabSample = new AudioSample[26];
 
 void setup(){
  minim = new Minim(this);
  size(800,800);
  background(100,100,100);
  //On importe tous les sons du tableau
- for (int i = 0; i < 16; i++){
+ for (int i = 0; i < 26; i++){
    tabSample[i] = minim.loadSample("sample" + i + ".mp3");
   
  }
@@ -114,6 +124,7 @@ void setup(){
  texte = "";
  isEnding = false;
  isActivate15 = false;
+ isActivate18 = false;
  
 }
 
@@ -321,8 +332,46 @@ void draw() {
      }
    }
    
-      
-
+   //-------------------------------- Key = q ------------------------
+   
+     if(isActivate16 ==true){
+     
+     if(sinus < 800) {
+     sinus = sinus + 8.5;
+     noStroke();
+     fill(random(0,255),random(0,255),random(0,255));
+     ellipse(coordXq+ sin(sinus*0.1)*20,sinus,5,5);
+    
+     }
+     
+     }
+     
+   
+     
+   
+   //------------------------------- Key = s -------------------
+   
+   if(isActivate18 ==true){
+     
+     if(sinus < 800) {
+     sinus = sinus + 8.5;
+     noStroke();
+     fill(random(0,255),random(0,255),random(0,255));
+     ellipse(sinus,coordYs+ sin(sinus*0.1)*20,5,5);
+    
+     }
+     
+   }
+   
+   //----------------------------------- Key = v -------------------
+   
+  if(isActivate21 ==true){
+    coordXv1 = coordXv1 + 10;
+    
+    line(coordYv1,800,coordXv1,coordXv1);
+     
+     
+   }
       
       
   
@@ -569,6 +618,73 @@ void keyPressed() {
         
          
        }    
+       
+         // Lettre q
+       
+       else if (keyIndex == 16){
+         coordXq = random(1,15)*50;
+       
+          sinus = 0;
+             isActivate16 = true;
+       }
+   
+   
+   //Lettre r
+   
+       else if (keyIndex ==17){
+      fill(random(0,255) , random(0,255) ,random(0,255));
+         arc(random(1,15)*50, random(1,15)*50, 90, 90, 0, random(0,3));
+
+       }
+       
+       // Lettre s
+       
+       else if (keyIndex == 18){
+         coordYs = random(1,15)*50;
+          isActivate18 = true;
+          sinus = 0;
+       }
+       
+          //Lettre t
+          
+              else if (keyIndex == 19) {
+                
+         
+       }
+       
+       //Lettre u
+       
+         else if (keyIndex == 20) {
+         
+       }
+       
+   
+       
+    
+       
+       
+       //Lettre v
+       
+       else if(keyIndex ==21){
+         isActivate21 = true;
+         coordXv1 = 0;
+         coordYv1 = random(1,15)*50;
+       }
+       
+       //Lettre wxyz
+       
+       else if (keyIndex > 21 || keyIndex == 19 || keyIndex == 20){
+         
+          noFill();
+         triangle(coordXe1, coordYe1, coordXe2, coordYe2, coordXe3, coordYe3 );
+         coordXe1 = random(1,15)*50;
+         coordYe1 = random(1,15)*50;
+         coordXe2 = random(1,15)*50;
+         coordYe2 = random(1,15)*50;
+         coordXe3 = random(1,15)*50;
+         coordYe3 = random(1,15)*50;
+       }
+       
    
  }
  
@@ -623,7 +739,7 @@ void mousePressed(){
 void stop() {
   
   //On ferme tous les sample importés
-  for (int i = 0; i<16; i++){
+  for (int i = 0; i<26; i++){
   tabSample[i].close();
   }
   
