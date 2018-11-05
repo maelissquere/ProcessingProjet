@@ -105,6 +105,9 @@ void setup(){
  minim = new Minim(this);
  size(800,800);
  background(100,100,100);
+ textSize(30);
+ fill(0);
+ text("Ecrivez votre prénom",225,50);
  //On importe tous les sons du tableau
  for (int i = 0; i < 26; i++){
    tabSample[i] = minim.loadSample("sample" + i + ".mp3");
@@ -145,6 +148,7 @@ void draw() {
      if (dessineDeuxiemeEllipse == true){
         if(millis() - c > 158){
         dessineDeuxiemeEllipse = false;
+        noStroke();
         fill( random(0,255),random(0,255),random(0,255));
         ellipse(random(0,600), random(0,600), 10,10);
          }
@@ -160,6 +164,7 @@ void draw() {
       if (dessineTroisiemeEllipse == true){
          if(millis() - c > 450){
          dessineTroisiemeEllipse = false;
+         noStroke();
          fill( random(0,255),random(0,255),random(0,255));
          ellipse(random(0,600), random(0,600), 10,10);   
          }
@@ -198,6 +203,7 @@ void draw() {
       if(isActivate9 == true){
          if (coordXj <500) {
          coordXj = coordXj + 10;
+         stroke(10);
          fill( random(0,255),random(0,255),random(0,255), 100);
          bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
           }
@@ -205,6 +211,7 @@ void draw() {
           if(millis() - j > 1300) {
              if (coordXj <1000) {
              coordXj = coordXj + 10;
+              stroke(10);
              fill( random(0,255),random(0,255),random(0,255), 100);
              bezier(coordXdepartj, coordYdepartj, coordXj, 80, 75,coordXj, coordXarriveej, coordYarriveej);
              }  
@@ -249,6 +256,7 @@ void draw() {
             dessineDeuxiemeTetris = false;
             coordXn = random(1,15)*50;
             coordYn = random(1,15)*50;
+            stroke(10);
             strokeWeight(5);
             beginShape();
             vertex(coordXn + 40, coordYn+ 40);
@@ -269,6 +277,7 @@ void draw() {
             coordXn = random(1,15)*50;
             coordYn = random(1,15)*50;
             strokeWeight(5);
+            stroke(10);
             beginShape();
             vertex(coordXn + 40, coordYn+ 40);
             vertex(coordXn + 60, coordYn + 40);
@@ -304,6 +313,7 @@ void draw() {
           }
          noFill();
          strokeWeight(2);
+          stroke(10);
          stroke(random(0,255), random(0,255), random(0,255));
          ellipse(random(0,700), positionYo,50,50);
         }
@@ -367,7 +377,7 @@ void draw() {
    
   if(isActivate21 ==true){
     coordXv1 = coordXv1 + 10;
-    
+    stroke(10);
     line(coordYv1,800,coordXv1,coordXv1);
      
      
@@ -409,9 +419,10 @@ void keyPressed() {
          diameter =1; 
          noStroke();
          fill(random(0,255),random(0,255),random(0,255));
-         ellipse(coordXb, coordYb, diameter, diameter);
          coordXb = random(50,750);
          coordYb = random(50,750);
+         ellipse(coordXb, coordYb, diameter, diameter);
+        
        }
        //Lettre c
        else if (keyIndex == 2){
@@ -427,22 +438,24 @@ void keyPressed() {
        else if(keyIndex == 3){
          
          d = millis();
-         isActivate3 = true;
          coordX4 = random(0,600);
          coordY4 = random(0,600);
+         isActivate3 = true;
+  
          
        }
        //Lettre e
        else if(keyIndex == 4){
- 
+         stroke(10);
          fill( random(0,255),random(0,255),random(0,255));
-         triangle(coordXe1, coordYe1, coordXe2, coordYe2, coordXe3, coordYe3 );
+     
          coordXe1 = random(1,15)*50;
          coordYe1 = random(1,15)*50;
          coordXe2 = random(1,15)*50;
          coordYe2 = random(1,15)*50;
          coordXe3 = random(1,15)*50;
          coordYe3 = random(1,15)*50;
+         triangle(coordXe1, coordYe1, coordXe2, coordYe2, coordXe3, coordYe3 );
        }
        
        //Lettre f
@@ -450,7 +463,7 @@ void keyPressed() {
          
          stroke(0);
          fill( random(0,255),random(0,255),random(0,255), 100);
-         bezier(coordXf1, coordYf1, coordXf2, coordYf2, coordXf3, coordYf3, coordXf4, coordYf4);
+ 
          coordXf1 = random(1,15)*50;
          coordYf1 = random(1,15)*50;
          coordXf2 = random(1,15)*50;
@@ -459,14 +472,13 @@ void keyPressed() {
          coordYf3 = random(1,15)*50;
          coordXf4 = random(1,15)*50;
          coordYf4 = random(1,15)*50; 
+         bezier(coordXf1, coordYf1, coordXf2, coordYf2, coordXf3, coordYf3, coordXf4, coordYf4);
        }
        //Lettre g
        else if(keyIndex == 6) {
          
-         
+         stroke(10);
          fill(random(0,255),random(0,255),random(0,255));
-         
-         
          coordXg = random(1,15)*50;
          coordYg = random(1,15)*50;
          beginShape(TRIANGLE_STRIP);
@@ -481,7 +493,7 @@ void keyPressed() {
        }
        //Lettre h
        else if(keyIndex == 7){
-     
+         stroke(10);
          fill(random(0,255),random(0,255),random(0,255),90);
         
          beginShape();
@@ -497,7 +509,7 @@ void keyPressed() {
        
        // Lettre i
        else if(keyIndex == 8){
-         
+         stroke(10);
          fill(random(0,255),random(0,255),random(0,255));
          coordXi = random(1,15)*50;
          coordYi = random(1,15)*50;
@@ -527,6 +539,7 @@ void keyPressed() {
        
        //Lettre k
          else if(keyIndex == 10){
+         noStroke();
          fill(random(0,255),random(0,255),random(0,255));
          coordXk = random(1,15)*50;
          coordYk = random(1,15)*50;
@@ -592,6 +605,7 @@ void keyPressed() {
         endShape(CLOSE);
         isActivate13 = true;
         n1 = millis();
+        n2 = millis();
         dessineDeuxiemeTetris = true;
         dessineTroisiemeTetris = true;
     }
@@ -645,22 +659,6 @@ void keyPressed() {
           sinus = 0;
        }
        
-          //Lettre t
-          
-              else if (keyIndex == 19) {
-                
-         
-       }
-       
-       //Lettre u
-       
-         else if (keyIndex == 20) {
-         
-       }
-       
-   
-       
-    
        
        
        //Lettre v
@@ -674,15 +672,16 @@ void keyPressed() {
        //Lettre wxyz
        
        else if (keyIndex > 21 || keyIndex == 19 || keyIndex == 20){
-         
+       
           noFill();
-         triangle(coordXe1, coordYe1, coordXe2, coordYe2, coordXe3, coordYe3 );
+         stroke(10);
          coordXe1 = random(1,15)*50;
          coordYe1 = random(1,15)*50;
          coordXe2 = random(1,15)*50;
          coordYe2 = random(1,15)*50;
          coordXe3 = random(1,15)*50;
          coordYe3 = random(1,15)*50;
+           triangle(coordXe1, coordYe1, coordXe2, coordYe2, coordXe3, coordYe3 );
        }
        
    
@@ -705,9 +704,17 @@ else if (key == ENTER){
   text("Recommencer", 50,300);
   text("Quitter",600,300);
   
+  
+  
  
  
   isEnding = true;
+}
+
+else if (key == ' '){
+  
+  setup();
+  draw();
 }
    
    
